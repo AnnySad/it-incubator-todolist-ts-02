@@ -21,23 +21,6 @@ function App() {
 
     }
 
-  /* const [filter, setFilter] = useState<filterType>('ALL')*/
-
-   /* let filteredT = tasks*/
-   /* if (filter === 'Active') {*/
-   /*     filteredT = tasks.filter(f => f.isDone)*/
-   /* }*/
-   /* if (filter === 'Completed') {*/
-   /*     filteredT = tasks.filter(f => !f.isDone)*/
-   /* }*/
-
-
-   /* const filteredTasks = (filterValue: filterType) => {*/
-   /*     setFilter(filterValue)*/
-   /*     console.log(filterValue)*/
-   /* }*/
-
-
    
     return (
         <div className="App">
@@ -45,7 +28,6 @@ function App() {
                 title="What to learn"
                 tasks={tasks}
                 removeTasks={removeTasks}
-                //filteredTasks={filteredTasks}
              />
         </div>
     );
