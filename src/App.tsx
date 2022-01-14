@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import './App.css';
 import {Todolist} from './Todolist';
-import {debuglog} from "util";
 
 
-export type filterType= 'ALL'| 'Active' | 'Completed'
+ export type filterType = 'ALL' | 'Active' | 'Completed'
+
+
 function App() {
-
 
 
     const [tasks, setTask] = useState([
@@ -15,40 +15,38 @@ function App() {
         {id: 3, title: "ReactJS", isDone: false}
     ])
 
-    const removeTasks = (taskID:number) => {
-        //filter tasks- delete bad string
-       /* const task= tasks.filter(f=>f.id!==taskID)
-        console.log(task)*/
+    const removeTasks = (taskID: number) => {
 
-        setTask(tasks.filter(f=>f.id !== taskID))
+        setTask(tasks.filter(f => f.id !== taskID))
 
     }
 
-    const [filter, setFilter] = useState<filterType>('ALL')
+  /* const [filter, setFilter] = useState<filterType>('ALL')*/
 
-    let filteredT = tasks
-    if(filter==='Active'){
-        filteredT= tasks.filter(f=>f.isDone)
-    }
-    if(filter==='Completed'){
-        filteredT= tasks.filter(f=>!f.isDone)
-    }
+   /* let filteredT = tasks*/
+   /* if (filter === 'Active') {*/
+   /*     filteredT = tasks.filter(f => f.isDone)*/
+   /* }*/
+   /* if (filter === 'Completed') {*/
+   /*     filteredT = tasks.filter(f => !f.isDone)*/
+   /* }*/
 
 
-    const filteredTasks=(filterValue:filterType)=>{
-        setFilter(filterValue)
-        console.log(filterValue)
-    }
-    
+   /* const filteredTasks = (filterValue: filterType) => {*/
+   /*     setFilter(filterValue)*/
+   /*     console.log(filterValue)*/
+   /* }*/
 
+
+   
     return (
         <div className="App">
             <Todolist
                 title="What to learn"
-                tasks={filteredT}
+                tasks={tasks}
                 removeTasks={removeTasks}
-                filteredTasks={filteredTasks}
-            />
+                //filteredTasks={filteredTasks}
+             />
         </div>
     );
 }

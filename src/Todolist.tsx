@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {filterType} from "./App";
+
 
 type TaskType = {
     id: number
@@ -10,12 +11,31 @@ type TaskType = {
 type PropsType = {
     title: string
     tasks: Array<TaskType>
-    removeTasks:(taskID: number)=>void
-    filteredTasks:(filterValue:filterType)=>void
+    removeTasks: (taskID: number) => void
+    filteredTasks?: (filterValue: filterType) => void
 
 }
 
+
 export function Todolist(props: PropsType) {
+
+    const [filter, setFilter] = useState<filterType>('ALL')
+
+    let filteredT = props.tasks
+    if (filter === 'Active') {
+        filteredT = filteredT.filter(f => f.isDone)
+    }
+    if (filter === 'Completed') {
+        filteredT = filteredT.filter(f => !f.isDone)
+    }
+
+
+    const filteredTasks = (filterValue: filterType) => {
+        setFilter(filterValue)
+        console.log(filterValue)
+    }
+
+
     return <div>
         <h3>{props.title}</h3>
         <div>
@@ -23,10 +43,10 @@ export function Todolist(props: PropsType) {
             <button>+</button>
         </div>
         <ul>
-            {props.tasks.map((m,i) => {
+            {filteredT.map((m, i) => {
                 return (
                     <li key={i}>
-                        <button onClick={()=>props.removeTasks(m.id)}>X</button>
+                        <button onClick={() => props.removeTasks(m.id)}>X</button>
                         <input type="checkbox" checked={m.isDone}/>
                         <span>{m.title}</span>
                     </li>
@@ -35,9 +55,10 @@ export function Todolist(props: PropsType) {
 
         </ul>
         <div>
-            <button onClick={()=>props.filteredTasks('ALL')}>All</button>
-            <button onClick={()=>props.filteredTasks('Active')}>Active</button>
-            <button onClick={()=>props.filteredTasks('Completed')}>Completed</button>
+            <button onClick={() => filteredTasks('ALL')}>All</button>
+            <button onClick={() => filteredTasks('Active')}>Active</button>
+            <button onClick={() => filteredTasks('Completed')}>Completed</button>
         </div>
+
     </div>
 }
